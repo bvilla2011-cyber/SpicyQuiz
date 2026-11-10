@@ -75,7 +75,7 @@ button:focus-visible{outline:4px solid #e4b75e;outline-offset:4px}
 
     <div id="quiz" class="content hidden">
       <div class="gamehead"><span id="counter">Pregunta 1 de 10</span><span id="score">⭐ 0 puntos</span></div>
-      <div class="progress" role="progressbar" aria-label="Progreso del juego" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="bar"></div></div>
+      <div class="progress" role="progressbar" aria-label="Progreso del juego" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0"><div id="bar"></div></div>
       <div id="category" class="category">Naturaleza</div>
       <h2 id="question" class="question">Pregunta</h2>
       <div id="answers" class="answers"></div>
@@ -97,36 +97,38 @@ button:focus-visible{outline:4px solid #e4b75e;outline-offset:4px}
 </main>
 <script>
 const bank=[
-{c:"Los días",q:"¿Qué día viene después del lunes?",a:["Martes","Domingo","Viernes"],ok:0,why:"¡Muy bien! Después del lunes viene el martes."},
-{c:"Los colores",q:"¿De qué color es normalmente el cielo despejado?",a:["Verde","Azul","Rojo"],ok:1,why:"¡Correcto! El cielo despejado suele verse azul."},
-{c:"Los animales",q:"¿Qué animal ladra?",a:["El gato","La vaca","El perro"],ok:2,why:"¡Eso es! El perro hace guau, guau."},
-{c:"La comida",q:"¿Qué fruta es roja y tiene pequeñas semillas por fuera?",a:["La fresa","El limón","La pera"],ok:0,why:"¡Muy bien! Es la fresa."},
-{c:"El cuerpo",q:"¿Cuántos ojos tenemos normalmente?",a:["Uno","Dos","Cuatro"],ok:1,why:"¡Exacto! Tenemos dos ojos."},
-{c:"La casa",q:"¿Qué usamos para abrir una puerta cerrada con llave?",a:["Un tenedor","Un lápiz","Una llave"],ok:2,why:"¡Correcto! Para abrir la cerradura usamos una llave."},
-{c:"Los números",q:"¿Cuánto son dos más dos?",a:["Cuatro","Cinco","Tres"],ok:0,why:"¡Muy bien! Dos más dos son cuatro."},
-{c:"La naturaleza",q:"¿Qué cae del cielo cuando llueve?",a:["Arena","Agua","Hojas"],ok:1,why:"¡Eso es! Cuando llueve caen gotas de agua."},
-{c:"La ropa",q:"¿Qué nos ponemos en los pies para caminar por la calle?",a:["Guantes","Sombrero","Zapatos"],ok:2,why:"¡Correcto! Nos ponemos zapatos."},
-{c:"Las estaciones",q:"¿En qué estación hace más calor normalmente?",a:["Verano","Invierno","Otoño"],ok:0,why:"¡Muy bien! El verano suele ser la estación más calurosa."},
-{c:"La cocina",q:"¿Con qué cubierto solemos comer la sopa?",a:["Con un cuchillo","Con una cuchara","Con un tenedor"],ok:1,why:"¡Exacto! La sopa se come con cuchara."},
-{c:"Los animales",q:"¿Qué animal produce leche y suele vivir en una granja?",a:["El león","El loro","La vaca"],ok:2,why:"¡Muy bien! La vaca nos da leche."},
-{c:"El tiempo",q:"¿Qué usamos cuando hace mucho sol para protegernos la cabeza?",a:["Una gorra","Un paraguas cerrado","Unas botas"],ok:0,why:"¡Correcto! Una gorra nos protege del sol."},
-{c:"Las frutas",q:"¿De qué color es normalmente un plátano maduro?",a:["Azul","Amarillo","Morado"],ok:1,why:"¡Eso es! El plátano maduro suele ser amarillo."},
-{c:"La música",q:"¿Qué instrumento musical tiene teclas?",a:["El tambor","La guitarra","El piano"],ok:2,why:"¡Muy bien! El piano tiene teclas blancas y negras."},
-{c:"El calendario",q:"¿Cuántos meses tiene un año?",a:["Doce","Seis","Veinte"],ok:0,why:"¡Correcto! Un año tiene doce meses."},
-{c:"La geografía",q:"¿En qué país vivimos si estamos en Barcelona?",a:["Francia","España","Italia"],ok:1,why:"¡Exacto! Barcelona está en España."},
-{c:"Los transportes",q:"¿Qué vehículo tiene dos ruedas y pedales?",a:["Un coche","Un autobús","Una bicicleta"],ok:2,why:"¡Muy bien! La bicicleta tiene dos ruedas y pedales."},
-{c:"La higiene",q:"¿Qué usamos para lavarnos las manos?",a:["Agua y jabón","Aceite y harina","Pintura"],ok:0,why:"¡Correcto! Nos lavamos las manos con agua y jabón."},
-{c:"Los animales",q:"¿Qué animal tiene una trompa larga?",a:["El caballo","El elefante","El conejo"],ok:1,why:"¡Eso es! El elefante tiene una trompa larga."},
-{c:"La casa",q:"¿En qué habitación solemos dormir?",a:["En la cocina","En el baño","En el dormitorio"],ok:2,why:"¡Muy bien! Dormimos en el dormitorio."},
-{c:"Las plantas",q:"¿Qué necesitan las flores para vivir?",a:["Agua y luz","Chocolate","Zapatos"],ok:0,why:"¡Exacto! Las plantas necesitan agua y luz."},
-{c:"La comida",q:"¿Qué alimento se hace tostando una rebanada de pan?",a:["Una sopa","Una tostada","Una ensalada"],ok:1,why:"¡Correcto! Al tostar el pan hacemos una tostada."},
-{c:"Los sentidos",q:"¿Con qué parte del cuerpo olemos una flor?",a:["Con las rodillas","Con las orejas","Con la nariz"],ok:2,why:"¡Muy bien! Olemos con la nariz."}
+{c:"Geografía",q:"¿Cuál es la capital de Francia?",a:["Roma","París","Lisboa"],ok:1,why:"¡Correcto! París es la capital de Francia."},
+{c:"Historia",q:"¿En qué ciudad se encuentra la Sagrada Familia?",a:["Madrid","Valencia","Barcelona"],ok:2,why:"¡Muy bien! La Sagrada Familia está en Barcelona."},
+{c:"Naturaleza",q:"¿Qué planeta es conocido como el planeta rojo?",a:["Marte","Venus","Júpiter"],ok:0,why:"¡Exacto! Marte recibe ese nombre por su color rojizo."},
+{c:"Cultura general",q:"¿Cuántos lados tiene un hexágono?",a:["Cinco","Seis","Ocho"],ok:1,why:"¡Muy bien! Un hexágono tiene seis lados."},
+{c:"Animales",q:"¿Cuál es el animal terrestre más grande del mundo?",a:["El rinoceronte","La jirafa","El elefante africano"],ok:2,why:"¡Correcto! El elefante africano es el animal terrestre más grande."},
+{c:"Cocina",q:"¿Cuál es el ingrediente principal del guacamole?",a:["El aguacate","El tomate","El pepino"],ok:0,why:"¡Eso es! El aguacate es la base del guacamole."},
+{c:"Música",q:"¿Qué instrumento suele tener seis cuerdas?",a:["El piano","La guitarra","La flauta"],ok:1,why:"¡Correcto! La guitarra clásica suele tener seis cuerdas."},
+{c:"Deporte",q:"¿Cuántos jugadores de un equipo de fútbol hay en el campo al comenzar un partido?",a:["Nueve","Diez","Once"],ok:2,why:"¡Muy bien! Cada equipo empieza con once jugadores."},
+{c:"Ciencia",q:"¿Qué órgano bombea la sangre por todo el cuerpo?",a:["El corazón","El pulmón","El estómago"],ok:0,why:"¡Exacto! El corazón impulsa la sangre por el cuerpo."},
+{c:"Geografía",q:"¿Qué mar baña las costas de Barcelona?",a:["El mar Cantábrico","El mar Mediterráneo","El océano Atlántico"],ok:1,why:"¡Muy bien! Barcelona está junto al mar Mediterráneo."},
+{c:"Historia",q:"¿Cómo se llamaba el famoso barco que se hundió en 1912?",a:["Santa María","Britannic","Titanic"],ok:2,why:"¡Correcto! El Titanic se hundió en abril de 1912."},
+{c:"Naturaleza",q:"¿Qué árbol produce bellotas?",a:["La encina","El olivo","El naranjo"],ok:0,why:"¡Eso es! Las encinas y los robles producen bellotas."},
+{c:"Cultura general",q:"¿Cuántos minutos tiene una hora y media?",a:["60","90","100"],ok:1,why:"¡Correcto! Una hora y media son 90 minutos."},
+{c:"Animales",q:"¿Cómo se llama la cría de la oveja?",a:["Potro","Ternero","Cordero"],ok:2,why:"¡Muy bien! La cría de la oveja es el cordero."},
+{c:"Cocina",q:"¿De qué alimento se obtiene principalmente el aceite de oliva?",a:["De las aceitunas","De las almendras","De las uvas"],ok:0,why:"¡Exacto! El aceite de oliva se obtiene de las aceitunas."},
+{c:"Cine",q:"¿Qué personaje de cuento pierde un zapato de cristal?",a:["Blancanieves","Cenicienta","La Bella Durmiente"],ok:1,why:"¡Correcto! Cenicienta pierde su zapato de cristal."},
+{c:"Deporte",q:"¿En qué deporte se utiliza una raqueta y una pelota amarilla?",a:["Baloncesto","Ciclismo","Tenis"],ok:2,why:"¡Muy bien! En el tenis se juega con raqueta y pelota."},
+{c:"Ciencia",q:"¿Qué gas necesitan las personas para respirar?",a:["Oxígeno","Helio","Hidrógeno"],ok:0,why:"¡Exacto! Nuestro cuerpo necesita oxígeno para vivir."},
+{c:"Geografía",q:"¿Cuál es el río que pasa por Zaragoza?",a:["El Tajo","El Ebro","El Duero"],ok:1,why:"¡Correcto! El río Ebro atraviesa Zaragoza."},
+{c:"Cultura general",q:"¿Qué estación del año viene después del verano?",a:["Primavera","Invierno","Otoño"],ok:2,why:"¡Muy bien! Después del verano llega el otoño."},
+{c:"Historia",q:"¿Qué civilización construyó las pirámides de Guiza?",a:["Los antiguos egipcios","Los romanos","Los vikingos"],ok:0,why:"¡Correcto! Las grandes pirámides de Guiza fueron construidas en el antiguo Egipto."},
+{c:"Naturaleza",q:"¿Cómo se llama el proceso por el que las plantas fabrican su alimento con la luz?",a:["La evaporación","La fotosíntesis","La digestión"],ok:1,why:"¡Exacto! Ese proceso se llama fotosíntesis."},
+{c:"Cultura general",q:"¿Cuántos días tiene un año bisiesto?",a:["364","365","366"],ok:2,why:"¡Muy bien! Un año bisiesto tiene 366 días."},
+{c:"Arte",q:"¿Qué pintor español es conocido por pintar el Guernica?",a:["Pablo Picasso","Salvador Dalí","Joan Miró"],ok:0,why:"¡Correcto! El Guernica es una de las obras más conocidas de Picasso."},
+{c:"Geografía",q:"¿En qué continente se encuentra Japón?",a:["Europa","Asia","África"],ok:1,why:"¡Muy bien! Japón está en Asia."},
+{c:"Ciencia",q:"¿A qué temperatura hierve el agua al nivel del mar?",a:["50 grados","80 grados","100 grados"],ok:2,why:"¡Exacto! El agua hierve aproximadamente a 100 °C al nivel del mar."}
 ];
 const $=id=>document.getElementById(id);
 let round=[],index=0,points=0,locked=false;
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function show(id){["welcome","quiz","result"].forEach(x=>$(x).classList.toggle("hidden",x!==id))}
-function start(){round=shuffle(bank).slice(0,10);index=0;points=0;show("quiz");draw()}
+function start(){round=shuffle(bank).slice(0,20);index=0;points=0;show("quiz");draw()}
 function draw(){
  locked=false;const item=round[index];
  $("counter").textContent="Pregunta "+(index+1)+" de "+round.length;
@@ -147,7 +149,7 @@ function choose(choice){
  $("next").textContent=index===round.length-1?"Ver resultado ⭐":"Siguiente pregunta →";$("next").classList.remove("hidden");$("next").focus();
 }
 function finish(){
- show("result");$("finalScore").textContent=points+"/10";
+ show("result");$("finalScore").textContent=points+"/20";
  const icon=points===10?"🏆":points>=7?"🌟":points>=4?"🌷":"❤️";$("resultIcon").textContent=icon;
  const msg=points===10?"¡Pleno total! ¡Sois unos campeones! Pero el mejor premio es compartir este ratito.":points>=7?"¡Fantástico! Habéis acertado un montón. ¡Qué bien lo habéis hecho!":points>=4?"¡Muy bien! Cada pregunta es una oportunidad para recordar y aprender algo nuevo.":"¡Bravo por participar! Lo importante no es la puntuación, sino disfrutar juntos.";
  $("resultText").textContent=msg+" Un abrazo enorme de Biel. ❤️";
