@@ -150,9 +150,9 @@ function choose(choice){
 }
 function finish(){
  show("result");$("finalScore").textContent=points+"/20";
- const icon=points===10?"🏆":points>=7?"🌟":points>=4?"🌷":"❤️";$("resultIcon").textContent=icon;
- const msg=points===10?"¡Pleno total! ¡Sois unos campeones! Pero el mejor premio es compartir este ratito.":points>=7?"¡Fantástico! Habéis acertado un montón. ¡Qué bien lo habéis hecho!":points>=4?"¡Muy bien! Cada pregunta es una oportunidad para recordar y aprender algo nuevo.":"¡Bravo por participar! Lo importante no es la puntuación, sino disfrutar juntos.";
- $("resultText").textContent=msg+" Un abrazo enorme de Biel. ❤️";
+ const icon=points===20?"🏆":points>=15?"🌟":points>=9?"🌷":"❤️";$("resultIcon").textContent=icon;
+ const msg=points===20?"¡Pleno total! ¡Sois unos campeones!":points>=15?"¡Fantástico! Habéis acertado un montón. ¡Qué bien lo habéis hecho!":points>=9?"¡Muy bien! Habéis demostrado que sabéis muchísimo.":"¡Bravo por participar! Lo importante es disfrutar y aprender juntos.";
+ $("resultText").textContent=msg+" ¡Sois muy buenos, Joaquín y Josefa! Un abrazo enorme de Biel. ❤️";
 }
 $("start").addEventListener("click",start);$("again").addEventListener("click",start);
 $("next").addEventListener("click",()=>{index++;if(index<round.length)draw();else finish()});
