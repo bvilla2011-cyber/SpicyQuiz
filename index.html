@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f1e6">
+<meta name="description" content="Un juego de preguntas hecho con cariño para Joaquín y Josefa.">
+<title>Un ratito juntos · Para Joaquín y Josefa</title>
+<style>
+:root{--paper:#f7f1e6;--card:#fffdf8;--ink:#26352e;--muted:#68756b;--green:#315d49;--green2:#47765e;--gold:#d69b42;--rose:#bd7669;--line:#e9e0d1;--shadow:0 18px 55px #43351b14}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--paper)}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:Georgia,"Times New Roman",serif;background:radial-gradient(ellipse at 12% 8%,#e8eddf 0,transparent 34%),radial-gradient(ellipse at 92% 92%,#f2dfd1 0,transparent 32%),var(--paper);display:flex;justify-content:center;align-items:center;padding:22px}
+button{font:inherit}
+.app{width:min(100%,760px);margin:auto}
+.topline{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--green);font:700 12px/1.2 system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;margin:0 0 18px}
+.topline:before,.topline:after{content:"";height:1px;width:34px;background:#b9c6b5}
+.panel{background:var(--card);border:1px solid #fff;border-radius:28px;box-shadow:var(--shadow);padding:clamp(24px,6vw,54px);position:relative;overflow:hidden}
+.panel:before{content:"";position:absolute;inset:10px;border:1px solid var(--line);border-radius:20px;pointer-events:none}
+.content{position:relative;z-index:1;text-align:center}
+.ornament{font-size:42px;line-height:1;margin:2px 0 20px}
+.eyebrow{font:700 12px system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--rose);margin:0 0 12px}
+h1{font-size:clamp(36px,8vw,62px);line-height:1.03;letter-spacing:-.04em;color:var(--green);margin:0 auto 18px;max-width:620px}
+h1 span{color:var(--gold);font-style:italic}
+.dedication{font-size:clamp(19px,4vw,25px);line-height:1.55;margin:18px auto 8px;max-width:530px}
+.signature{font-size:20px;color:var(--green);font-style:italic;margin:8px 0 26px}
+.intro{font:17px/1.65 system-ui,sans-serif;color:var(--muted);max-width:490px;margin:0 auto 28px}
+.primary{border:0;border-radius:16px;background:var(--green);color:white;padding:18px 30px;min-height:62px;font:700 19px system-ui,sans-serif;box-shadow:0 6px 0 #203f31;cursor:pointer;transition:transform .15s,background .15s;width:min(100%,360px)}
+.primary:hover{background:var(--green2);transform:translateY(-2px)}
+.primary:active{transform:translateY(2px);box-shadow:0 3px 0 #203f31}
+button:focus-visible{outline:4px solid #e4b75e;outline-offset:4px}
+.smallnote{font:14px system-ui,sans-serif;color:var(--muted);margin:22px 0 0}
+.gamehead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 16px;font:700 14px system-ui,sans-serif;color:var(--muted)}
+.progress{height:10px;background:#eee8dc;border-radius:99px;overflow:hidden;margin:0 0 34px}
+.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--green2),#91a77a);border-radius:99px;transition:width .3s}
+.category{display:inline-block;background:#edf1e8;color:var(--green);padding:9px 15px;border-radius:99px;font:700 13px system-ui,sans-serif;margin-bottom:17px}
+.question{font-size:clamp(27px,5.5vw,39px);line-height:1.2;margin:0 auto 28px;max-width:600px}
+.answers{display:grid;gap:13px;max-width:560px;margin:0 auto}
+.answer{width:100%;min-height:66px;text-align:left;display:flex;align-items:center;gap:15px;padding:13px 18px;border:2px solid var(--line);border-radius:16px;background:#fffefa;color:var(--ink);font:600 18px/1.35 system-ui,sans-serif;cursor:pointer;transition:border-color .15s,background .15s}
+.answer:hover:not(:disabled){border-color:#9bad96;background:#f5f8f1}
+.letter{flex:0 0 36px;height:36px;border-radius:11px;background:#f0eadf;color:var(--green);display:grid;place-items:center;font-weight:800}
+.answer.correct{border-color:#5b906b;background:#edf6ee}
+.answer.correct .letter{background:#d4ead8}
+.answer.wrong{border-color:#c98275;background:#fff1ed}
+.answer.wrong .letter{background:#f5d9d2}
+.answer:disabled{cursor:default;opacity:1}
+.feedback{min-height:66px;margin:19px auto 0;padding:14px 16px;border-radius:14px;background:#f5f1e8;font:16px/1.5 system-ui,sans-serif;color:var(--ink);max-width:560px}
+.feedback.good{background:#edf6ee;color:#28563a}
+.feedback.try{background:#fff1ed;color:#874c40}
+.nextwrap{margin:18px auto 0}
+.nextwrap .primary{min-height:56px;padding:15px 24px;font-size:17px}
+.hidden{display:none!important}
+.resulticon{font-size:58px;margin:0 0 14px}
+.score{font-size:clamp(54px,12vw,82px);line-height:1;color:var(--gold);font-weight:700;margin:16px 0 8px}
+.resulttext{font:18px/1.65 system-ui,sans-serif;color:var(--muted);max-width:500px;margin:12px auto 26px}
+.footer{font:13px system-ui,sans-serif;color:#8b9187;text-align:center;margin:17px 0 0}
+@media(max-width:520px){body{padding:12px}.panel{padding:32px 22px;border-radius:22px}.panel:before{inset:7px;border-radius:16px}.answer{min-height:62px;font-size:17px}.topline{margin-bottom:13px}.question{margin-bottom:22px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="topline">Un juego hecho con cariño</div>
+  <section class="panel" aria-live="polite">
+    <div id="welcome" class="content">
+      <div class="ornament" aria-hidden="true">🌷</div>
+      <p class="eyebrow">Un pequeño regalo para vosotros</p>
+      <h1>Un ratito <span>juntos</span></h1>
+      <p class="dedication">Con mucho cariño para <strong>Joaquín y Josefa</strong>,</p>
+      <p class="signature">de vuestro nieto Biel. ❤️</p>
+      <p class="intro">He preparado este juego pensando en vosotros. Son preguntitas fáciles, curiosidades y un poquito de diversión. Sin prisas, sin nervios y, sobre todo, ¡a disfrutar!</p>
+      <button class="primary" id="start">¡Vamos a jugar! 🌼</button>
+      <p class="smallnote">Podéis jugar juntos y ayudaros en cada pregunta.</p>
+    </div>
+
+    <div id="quiz" class="content hidden">
+      <div class="gamehead"><span id="counter">Pregunta 1 de 10</span><span id="score">⭐ 0 puntos</span></div>
+      <div class="progress" role="progressbar" aria-label="Progreso del juego" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div id="bar"></div></div>
+      <div id="category" class="category">Naturaleza</div>
+      <h2 id="question" class="question">Pregunta</h2>
+      <div id="answers" class="answers"></div>
+      <div id="feedback" class="feedback hidden" role="status" aria-live="polite"></div>
+      <div class="nextwrap"><button id="next" class="primary hidden">Siguiente pregunta →</button></div>
+    </div>
+
+    <div id="result" class="content hidden">
+      <div class="resulticon" id="resultIcon">🏆</div>
+      <p class="eyebrow">¡Lo habéis conseguido!</p>
+      <h2 style="font-size:clamp(34px,7vw,52px);color:var(--green);margin:0">¡Muy bien, Joaquín y Josefa!</h2>
+      <div class="score" id="finalScore">8/10</div>
+      <p class="resulttext" id="resultText">¡Fantástico! Lo importante es haber pasado un ratito juntos.</p>
+      <button class="primary" id="again">Volver a jugar 🔄</button>
+      <p class="smallnote">Un abrazo enorme de vuestro nieto Biel. ❤️</p>
+    </div>
+  </section>
+  <p class="footer">Hecho con ❤️ para Joaquín y Josefa · Biel</p>
+</main>
+<script>
+const bank=[
+{c:"Naturaleza",q:"¿Qué animal es conocido como el rey de la selva?",a:["El león","El conejo","La oveja"],ok:0,why:"¡Eso es! El león es conocido como el rey de la selva."},
+{c:"Cocina",q:"¿Cuál de estos alimentos se hace con leche?",a:["El pan","El queso","El arroz"],ok:1,why:"¡Muy bien! El queso se elabora con leche."},
+{c:"Geografía",q:"¿Cuál es la capital de España?",a:["Barcelona","Sevilla","Madrid"],ok:2,why:"¡Correcto! Madrid es la capital de España."},
+{c:"Vida cotidiana",q:"¿Con qué nos cepillamos los dientes?",a:["Con un peine","Con un cepillo de dientes","Con una cuchara"],ok:1,why:"¡Exacto! El cepillo de dientes nos ayuda a cuidar la sonrisa."},
+{c:"Animales",q:"¿Qué animal dice «miau»?",a:["El gato","El perro","La vaca"],ok:0,why:"¡Muy bien! El gato dice «miau»."},
+{c:"Naturaleza",q:"¿En qué estación suelen caer las hojas de muchos árboles?",a:["En verano","En otoño","En primavera"],ok:1,why:"¡Correcto! En otoño muchos árboles pierden sus hojas."},
+{c:"Cultura general",q:"¿Cuántos días tiene una semana?",a:["Cinco","Siete","Diez"],ok:1,why:"¡Así es! Una semana tiene siete días."},
+{c:"Comida",q:"¿De qué fruta se obtiene el zumo de naranja?",a:["De la naranja","De la pera","Del plátano"],ok:0,why:"¡Claro que sí! El zumo de naranja se hace con naranjas."},
+{c:"Geografía",q:"¿Qué mar baña las costas de Barcelona?",a:["El mar Cantábrico","El océano Atlántico","El mar Mediterráneo"],ok:2,why:"¡Muy bien! Barcelona está junto al mar Mediterráneo."},
+{c:"Música",q:"¿Qué instrumento tiene teclas blancas y negras?",a:["La guitarra","El piano","El tambor"],ok:1,why:"¡Correcto! El piano tiene teclas blancas y negras."},
+{c:"Animales",q:"¿Qué animal nos da la lana?",a:["La oveja","El caballo","El pato"],ok:0,why:"¡Eso es! La lana se obtiene principalmente de las ovejas."},
+{c:"Tiempo",q:"¿Qué usamos para protegernos de la lluvia?",a:["Un abanico","Un paraguas","Un sombrero de playa"],ok:1,why:"¡Exacto! El paraguas nos protege de la lluvia."},
+{c:"Cuerpo humano",q:"¿Con qué parte del cuerpo escuchamos?",a:["Con los ojos","Con las manos","Con los oídos"],ok:2,why:"¡Muy bien! Escuchamos gracias a los oídos."},
+{c:"Deporte",q:"¿Cuántos jugadores tiene un equipo de fútbol en el campo al empezar?",a:["Once","Seis","Quince"],ok:0,why:"¡Correcto! Un equipo de fútbol empieza con once jugadores."},
+{c:"Naturaleza",q:"¿Qué necesitan las plantas para crecer?",a:["Piedras y humo","Agua y luz","Solo oscuridad"],ok:1,why:"¡Muy bien! El agua y la luz ayudan a las plantas a crecer."},
+{c:"Cultura general",q:"¿Cuántos meses tiene un año?",a:["Diez","Doce","Ocho"],ok:1,why:"¡Así es! El año tiene doce meses."},
+{c:"Comida",q:"¿Cuál de estos alimentos suele ser de color amarillo por dentro y tiene piel?",a:["El plátano","La lechuga","La fresa"],ok:0,why:"¡Correcto! El plátano es amarillo por dentro."},
+{c:"Geografía",q:"¿En qué país está la Torre Eiffel?",a:["Italia","Portugal","Francia"],ok:2,why:"¡Exacto! La Torre Eiffel está en París, Francia."},
+{c:"Vida cotidiana",q:"¿Qué aparato usamos para llamar a alguien que está lejos?",a:["Una tostadora","Un teléfono","Una lavadora"],ok:1,why:"¡Muy bien! Con un teléfono podemos llamar a otras personas."},
+{c:"Animales",q:"¿Qué animal es famoso por tener una trompa larga?",a:["El elefante","La jirafa","El pingüino"],ok:0,why:"¡Eso es! El elefante tiene una trompa muy especial."},
+{c:"Cultura general",q:"¿Qué color sale al mezclar azul y amarillo?",a:["Rojo","Verde","Morado"],ok:1,why:"¡Correcto! Azul y amarillo forman verde."},
+{c:"Tiempo",q:"¿Qué estación viene después del invierno?",a:["La primavera","El otoño","El verano"],ok:0,why:"¡Muy bien! Después del invierno llega la primavera."},
+{c:"Cocina",q:"¿En qué recipiente solemos preparar una sopa?",a:["En una sartén de planchar","En una olla","En un jarrón"],ok:1,why:"¡Exacto! La sopa se suele preparar en una olla."},
+{c:"Naturaleza",q:"¿Qué estrella nos da luz y calor durante el día?",a:["La Luna","Marte","El Sol"],ok:2,why:"¡Así es! El Sol nos da luz y calor."}
+];
+const $=id=>document.getElementById(id);
+let round=[],index=0,points=0,locked=false;
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function show(id){["welcome","quiz","result"].forEach(x=>$(x).classList.toggle("hidden",x!==id))}
+function start(){round=shuffle(bank).slice(0,10);index=0;points=0;show("quiz");draw()}
+function draw(){
+ locked=false;const item=round[index];
+ $("counter").textContent="Pregunta "+(index+1)+" de "+round.length;
+ $("score").textContent="⭐ "+points+" "+(points===1?"punto":"puntos");
+ $("bar").style.width=(index/round.length*100)+"%";
+ document.querySelector(".progress").setAttribute("aria-valuenow",index);
+ $("category").textContent=item.c;$("question").textContent=item.q;
+ $("feedback").className="feedback hidden";$("feedback").textContent="";$("next").classList.add("hidden");
+ const answers=$("answers");answers.innerHTML="";
+ item.a.forEach((answer,i)=>{const b=document.createElement("button");b.className="answer";b.type="button";const letter=document.createElement("span");letter.className="letter";letter.textContent=String.fromCharCode(65+i);const label=document.createElement("span");label.textContent=answer;b.append(letter,label);b.addEventListener("click",()=>choose(i));answers.append(b)});
+}
+function choose(choice){
+ if(locked)return;locked=true;const item=round[index];const buttons=[...$("answers").querySelectorAll("button")];const good=choice===item.ok;
+ if(good)points++;
+ buttons.forEach((b,i)=>{b.disabled=true;if(i===item.ok)b.classList.add("correct");else if(i===choice)b.classList.add("wrong")});
+ $("score").textContent="⭐ "+points+" "+(points===1?"punto":"puntos");
+ const fb=$("feedback");fb.className="feedback "+(good?"good":"try");fb.textContent=good?"¡Muy bien! 🎉 "+item.why:"¡No pasa nada! 😊 La respuesta correcta es: "+item.a[item.ok]+". ¡Vamos a por la siguiente!";
+ $("next").textContent=index===round.length-1?"Ver resultado ⭐":"Siguiente pregunta →";$("next").classList.remove("hidden");$("next").focus();
+}
+function finish(){
+ show("result");$("finalScore").textContent=points+"/10";
+ const icon=points===10?"🏆":points>=7?"🌟":points>=4?"🌷":"❤️";$("resultIcon").textContent=icon;
+ const msg=points===10?"¡Pleno total! ¡Sois unos campeones! Pero el mejor premio es compartir este ratito.":points>=7?"¡Fantástico! Habéis acertado un montón. ¡Qué bien lo habéis hecho!":points>=4?"¡Muy bien! Cada pregunta es una oportunidad para recordar y aprender algo nuevo.":"¡Bravo por participar! Lo importante no es la puntuación, sino disfrutar juntos.";
+ $("resultText").textContent=msg+" Un abrazo enorme de Biel. ❤️";
+}
+$("start").addEventListener("click",start);$("again").addEventListener("click",start);
+$("next").addEventListener("click",()=>{index++;if(index<round.length)draw();else finish()});
+</script>
+</body>
+</html>
